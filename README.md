@@ -6,6 +6,9 @@ A useful tool for converting video files to PNG sequences.
 
 # Screenshots
 
+![](./screenshot/screenshot-1.png)
+![](./screenshot/screenshot-2.png)
+
 # Usage
 
 Do as tips following
