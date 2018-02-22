@@ -1,0 +1,14 @@
+{
+    "name": "Video2PNGs",
+    "version": "0.1.0",
+    "main": "main.js",
+    "script":{
+        "dev": "electron . ",
+        "build:win32": "electron-packager . video2pngs --out=../video2pngs-win32-ia32 --platform=win32 --arch=ia32 --electron-version=1.8.2 --asar --app-version=0.1.0 --build-version=0.0.1 --no-package-manager --overwrite --ignore='(node_modules|screenshots|.git)' --prune",
+        "build:linux64": "electron-packager . video2pngs --out=../video2pngs-linux-x64 --platform=linux --arch=x64 --electron-version=1.8.2 --asar --app-version=0.1.0 --build-version=0.0.1 --no-package-manager --overwrite --ignore='(node_modules|screenshots|.git)' --prune"
+    },
+    "devDependencies": {
+        "electron": "^1.8.2",
+        "electron-packager": "^11.0.1"
+    }
+}

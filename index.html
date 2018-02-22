@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Video2PNGs </title>
+  <link rel="stylesheet" href="./static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body>
+
+<!-- Part 01 Begin -->
+<div class="card text-center my-form">
+  <div class="card-header">
+  </div>
+  <div class="card-body">
+	  <img class="d-block mx-auto mb-4" src="./static/images/logo.png">
+      <h1 class="card-title">
+          iSparta - Video2PNGs
+      </h1>
+      <p class="lead">
+          一款将视频文件转化为PNG序列图的小工具
+      </p>
+      <p class="blockquote-footer text-right">
+          made by zihengCat
+      </p>
+    <div class="card-text">
+    </div>
+  </div>
+</div>
+<!-- Part 01 End -->
+
+<!-- Part 02 Begin -->
+<div class="card text-center my-form">
+  <div class="card-header">
+  </div>
+  <div class="card-body">
+    <button  onclick="open_dialog('open')" type="button"
+    class="btn btn-lg btn-block btn-primary"> 打开视频文件 </button>
+    <p id="open-path" class="lead"></p>
+    <button  onclick="open_dialog('save')" type="button"
+    class="btn btn-lg btn-block btn-success"> 图片存储路径 </button>
+    <p id="save-path" class="lead"></p>
+  </div>
+</div>
+<!-- Part 02 End -->
+
+<!-- Part 03 Begin -->
+<div class="card my-form text-center">
+  <div class="card-header">
+  </div>
+  <div class="card-body" >
+    <video class="invisible" src="" controls="controls">
+    </video>
+  </div>
+</div>
+<!-- Part 03 End -->
+
+<!-- Part 04 Begin -->
+<div class="card my-form">
+  <div class="card-header">
+  </div>
+  <div class="card-body" >
+<!-- -->
+<div class="m-3">
+  <button type="button"
+          onclick="getVideoTime('start')"
+          class="my-btn my-btn-blue my-btn-md">
+  开始位置
+  </button>
+  <a data-toggle="popover" title=""
+     data-original-title="格式（时:分:秒.[帧]）"
+     data-content="点击可获取当前视频位置，也可手动调整">
+     <img src="./static/images/iconQ.svg" height="20">
+  </a>
+
+  <input type="text"
+         id="s-time"
+         class="my-input"
+         placeholder="00:00:00.00"
+         value="" required="">
+
+  <button type="button"
+          onclick="getVideoTime('end')"
+          class="my-btn my-btn-blue my-btn-md">
+  结束位置
+  </button>
+  <input type="text"
+         id="e-time"
+         class="my-input"
+         placeholder="00:00:00.00"
+         value="" required="">
+  <button type="button"
+          onclick="getVideoTime('diff')"
+          class="my-btn my-btn-blue my-btn-md">
+  持续时间
+  </button>
+
+  <a data-toggle="popover" title=""
+     data-original-title="手动刷新"
+     data-content="在时间参数设置完毕后，手动刷新该选项">
+     <img src="./static/images/iconQ.svg" height="20">
+  </a>
+
+  <input type="text"
+         id="d-time"
+         class="my-input"
+         placeholder="0"
+         value="" required="">
+</div>
+<!-- -->
+<!-- -->
+<div class="m-3">
+  <button type="button"
+          onclick="getVideoXY()"
+          class="my-btn my-btn-blue my-btn-md">
+  分辨率
+  </button>
+  <a data-toggle="popover" title=""
+     data-original-title="图片分辨率（长x宽）"
+     data-content="获取源视频分辨率，或手动调整大小（等比例）">
+     <img src="./static/images/iconQ.svg" height="20">
+  </a>
+
+  <input type="text"
+         id="v-width"
+         class="my-input"
+         placeholder="0"
+         value="" required="">
+  <!--
+  <img src="./images/iconX.svg" height="28"/>
+  -->
+  <input type="text"
+         id="v-height"
+         class="my-input"
+         placeholder="0"
+         value="" required="">
+</div>
+<!-- -->
+<!-- -->
+<div class="m-3">
+  <button  type="button"
+           class="my-btn my-btn-blue my-btn-md"
+           onclick="getFPS()">
+  输出帧率
+  </button>
+  <a data-toggle="popover" title=""
+     data-original-title="每秒图片数（FPS）"
+     data-content="默认16，可手动调整（<= 源视频帧率）">
+     <img src="./static/images/iconQ.svg" height="20">
+  </a>
+  <input type="text"
+         class="my-input"
+         id="fps"
+         placeholder="0"
+         value="" required="">
+</div>
+<!-- -->
+<!-- -->
+<div class="m-3 text-center">
+  <button type="button"
+          class="my-btn my-btn-red my-btn-lg"
+          onclick="doDialog()"
+          >
+
+  开始转换
+  </button>
+  <button type="button"
+          class="my-btn my-btn-green my-btn-lg"
+          onclick="doReset()"
+          >
+  重置参数
+  </button>
+</div>
+<!-- -->
+
+<!-- Part 05 -->
+<!--
+<div class="m-3">
+    <textarea rows="10" cols="80" id="progress-info" name="content" >
+    </textarea>
+</div>
+-->
+<!--
+<div class="m-3">
+  <div class="progress">
+    <div class="progress-bar bg-success progress-bar-striped
+                                        progress-bar-animated"
+         id="progress"
+         style="width: 35%">
+    </div>
+  </div>
+  <div class="text-center alert alert-danger">
+  </div>
+</div>
+-->
+<!-- Part 05 -->
+
+  </div>
+</div>
+<!-- Part 04 End -->
+
+
+<!-- Insert this line above script imports  -->
+<script>
+if (typeof module === 'object') {window.module = module; module = undefined;}
+</script>
+
+<!-- Normal script imports etc  -->
+<!-- Bootstrap Core JavaScript -->
+<script src="./static/js/jquery-3.3.1.min.js"></script>
+<script src="./static/js/bootstrap.bundle.min.js"></script>
+
+<!-- Insert this line after script imports -->
+<script>
+if (window.module) module = window.module;
+</script>
+
+<script type="text/javascript" src="./src/exec.js"></script>
+
+<script>
+$(function () {
+  $('[data-toggle="popover"]').popover();
+});
+</script>
+
+</body>
+</html>
